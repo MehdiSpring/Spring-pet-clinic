@@ -7,8 +7,7 @@ import com.springguru.model.Owner;
 import com.springguru.model.Vet;
 import com.springguru.service.OwnerService;
 import com.springguru.service.VetService;
-import com.springguru.service.map.OwnerServiceMap;
-import com.springguru.service.map.VetServiceMap;
+
 
 @Component
 public class LoaderData implements CommandLineRunner{
@@ -16,12 +15,14 @@ public class LoaderData implements CommandLineRunner{
 	private final OwnerService ownerService;
 	private final VetService vetService;
 	
-	public LoaderData()
-	{
-	    this.ownerService = new OwnerServiceMap();
-	    this.vetService = new VetServiceMap();
+	public LoaderData(OwnerService ownerService, VetService vetService) {
+		super();
+		this.ownerService = ownerService;
+		this.vetService = vetService;
 	}
-	
+
+
+
 	@Override
 	public void run(String... args) throws Exception {
 		
