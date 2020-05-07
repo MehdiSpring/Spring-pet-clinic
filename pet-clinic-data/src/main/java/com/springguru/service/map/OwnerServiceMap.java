@@ -3,9 +3,13 @@ package com.springguru.service.map;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import com.springguru.model.Owner;
 import com.springguru.service.OwnerService;
+import com.springguru.service.map.AbstractMapService;
 
+@Service
 public class OwnerServiceMap extends AbstractMapService<Long, Owner> implements OwnerService {
 
 	@Override
