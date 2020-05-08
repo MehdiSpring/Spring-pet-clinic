@@ -28,14 +28,14 @@ public class LoaderData implements CommandLineRunner{
 		
 		//Save some owners
 		Owner owner1 = new Owner();
-		owner1.setId(1L);
+		
 		owner1.setFirstName("Mehdi");
 		owner1.setLastName("BOUMZZI");
 		
 		this.ownerService.save(owner1);
 		
 		Owner owner2 = new Owner();
-		owner2.setId(2L);
+		
 		owner2.setFirstName("Oumayma");
 		owner2.setLastName("MAOUAJ");
 		
@@ -45,14 +45,14 @@ public class LoaderData implements CommandLineRunner{
 		
 		//Save some Vets
 		Vet vet1 = new Vet();
-		vet1.setId(1L);
+		
 		vet1.setFirstName("Jack");
 		vet1.setLastName("BAUER");
 		
 		this.vetService.save(vet1);
 		
 		Vet vet2 = new Vet();
-		vet2.setId(2L);
+		
 		vet2.setFirstName("Jaqueline");
 		vet2.setLastName("ROSE");
 		

@@ -1,22 +1,42 @@
 package com.springguru.service.map;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
-public abstract class AbstractMapService<ID,T> {
+import com.springguru.model.BaseEntity;
+
+public abstract class AbstractMapService<ID,T extends BaseEntity> {
 	
-	protected Map<ID, T> abstractMap = new HashMap<>();
+	protected Map<Long, T> abstractMap = new HashMap<>();
 	
 	public T findById(ID id)
 	{
 		return this.abstractMap.get(id);
 	}
 	
-	public T save(ID id, T object)
+	public T save(T object)
 	{
-		this.abstractMap.put(id, object);
+		Long nextId =null;
+		
+		if(object == null)
+		{
+			throw new NullPointerException(" #Exception# the oject is null !!!!");
+		}
+		
+		try {
+				nextId = Collections.max(abstractMap.keySet()) + 1;
+		}catch(NoSuchElementException e) {
+			nextId = 5L;
+		}
+		
+		
+		object.setId(nextId);
+		
+		this.abstractMap.put(object.getId(), object);
 		return object;
 	}
 	
