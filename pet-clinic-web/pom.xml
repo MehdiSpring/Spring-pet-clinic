@@ -79,6 +79,7 @@
   
   <build>
      <plugins>
+     <!-- this plugin allows to generate css ressources from less folder -->
 	      <plugin>
 	        <groupId>ro.isdc.wro4j</groupId>
 	        <artifactId>wro4j-maven-plugin</artifactId>
