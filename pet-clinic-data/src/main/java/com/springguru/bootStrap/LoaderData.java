@@ -4,8 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.springguru.model.Owner;
+import com.springguru.model.PetType;
 import com.springguru.model.Vet;
 import com.springguru.service.OwnerService;
+import com.springguru.service.PetTypeService;
 import com.springguru.service.VetService;
 
 
@@ -14,11 +16,13 @@ public class LoaderData implements CommandLineRunner{
 
 	private final OwnerService ownerService;
 	private final VetService vetService;
+	private final PetTypeService petTypeService;
 	
-	public LoaderData(OwnerService ownerService, VetService vetService) {
+	public LoaderData(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
+		this.petTypeService = petTypeService;
 	}
 
 
@@ -59,6 +63,20 @@ public class LoaderData implements CommandLineRunner{
 		this.vetService.save(vet2);
 		
 		System.out.println("Vets have been saved !!!");
+		
+		//Save some PetTypes
+		PetType petType1 = new PetType();
+		petType1.setName("petType1");
+		
+		this.petTypeService.save(petType1);
+		
+		PetType petType2 = new PetType();
+		petType2.setName("petType2");
+		
+		this.petTypeService.save(petType2);
+		
+		System.out.println("PetTypes have been saved !!!");
+		
 		
 	}
 
