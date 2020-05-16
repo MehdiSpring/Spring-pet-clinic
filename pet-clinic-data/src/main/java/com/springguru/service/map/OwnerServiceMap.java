@@ -9,6 +9,7 @@ import com.springguru.model.Owner;
 import com.springguru.service.OwnerService;
 import com.springguru.service.map.AbstractMapService;
 
+
 @Service
 public class OwnerServiceMap extends AbstractMapService<Long, Owner> implements OwnerService {
 
