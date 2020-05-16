@@ -9,10 +9,12 @@ import org.springframework.stereotype.Component;
 import com.springguru.model.Owner;
 import com.springguru.model.Pet;
 import com.springguru.model.PetType;
+import com.springguru.model.Speciality;
 import com.springguru.model.Vet;
 import com.springguru.service.OwnerService;
 import com.springguru.service.PetService;
 import com.springguru.service.PetTypeService;
+import com.springguru.service.SpecialityService;
 import com.springguru.service.VetService;
 
 
@@ -23,14 +25,16 @@ public class LoaderData implements CommandLineRunner{
 	private final VetService vetService;
 	private final PetTypeService petTypeService;
 	private final PetService petService;
+	private final SpecialityService specialityService;
 	
 	public LoaderData(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-			PetService petService) {
+			PetService petService, SpecialityService specialityService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.petService = petService;
+		this.specialityService = specialityService;
 	}
 
 
@@ -38,6 +42,17 @@ public class LoaderData implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		if(this.specialityService.findAll().size() == 0)
+		   loadeData();
+		
+		
+		
+		
+	}
+
+
+
+	private void loadeData() {
 		//Save some owners
 		Owner owner1 = new Owner();
 		
@@ -91,11 +106,19 @@ public class LoaderData implements CommandLineRunner{
 		
 		System.out.println("Pet and owners have been saved !!!");
 		
+		//Save some Specialities
+		Speciality speciality1 = new Speciality();
+		speciality1.setDescription("this is speciality 1.");
+		
+		Speciality speciality2 = new Speciality();
+		speciality2.setDescription("this is speciality 2.");
+		
 		//Save some Vets
 		Vet vet1 = new Vet();
 		
 		vet1.setFirstName("Jack");
 		vet1.setLastName("BAUER");
+		vet1.getSpecialities().add(speciality1);
 		
 		this.vetService.save(vet1);
 		
@@ -103,14 +126,11 @@ public class LoaderData implements CommandLineRunner{
 		
 		vet2.setFirstName("Jaqueline");
 		vet2.setLastName("ROSE");
+		vet1.getSpecialities().add(speciality2);
 		
 		this.vetService.save(vet2);
 		
-		System.out.println("Vets have been saved !!!");
-		
-		
-		
-		
+		System.out.println("Specialities and Vets have been saved !!!");
 	}
 
 }
