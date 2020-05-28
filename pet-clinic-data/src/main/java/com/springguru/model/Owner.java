@@ -3,12 +3,18 @@ package com.springguru.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Owner extends Person {
 	
 	private String address;
 	private String city;
 	private String tel;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets = new HashSet<Pet>();
 	
 	public String getAddress() {
