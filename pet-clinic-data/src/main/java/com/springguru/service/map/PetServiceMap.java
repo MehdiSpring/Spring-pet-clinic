@@ -2,6 +2,7 @@ package com.springguru.service.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.springguru.model.Pet;
@@ -12,16 +13,8 @@ import com.springguru.service.PetTypeService;
 
 
 @Service
+@Profile({"default","map"})
 public class PetServiceMap extends AbstractMapService<Long, Pet> implements PetService {
-
-	private final PetTypeService petTypeService;
-	private final OwnerService ownerService;
-	
-	
-	public PetServiceMap(PetTypeService petTypeService, OwnerService ownerService) {
-		this.petTypeService = petTypeService;
-		this.ownerService = ownerService;
-	}
 
 	@Override
 	public Pet findById(Long id) {
@@ -32,7 +25,7 @@ public class PetServiceMap extends AbstractMapService<Long, Pet> implements PetS
 	@Override
 	public Pet save(Pet object) {
 		
-		if(object != null)
+		/*if(object != null)
 		{
 			if(object.getPetType() != null)
 			{
@@ -50,7 +43,7 @@ public class PetServiceMap extends AbstractMapService<Long, Pet> implements PetS
 				}
 			}
 			
-		}
+		}*/
 		return super.save(object);
 	}
 

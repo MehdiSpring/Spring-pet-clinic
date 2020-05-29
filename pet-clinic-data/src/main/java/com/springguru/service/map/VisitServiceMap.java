@@ -2,12 +2,14 @@ package com.springguru.service.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.springguru.model.Visit;
 import com.springguru.service.VisitService;
 
 @Service
+@Profile({"default","map"})
 public class VisitServiceMap extends AbstractMapService<Long, Visit> implements VisitService {
 
 	@Override

@@ -53,6 +53,38 @@ public class LoaderData implements CommandLineRunner{
 
 
 	private void loadeData() {
+		
+		//Save some PetTypes
+		PetType petType1 = new PetType();
+		petType1.setName("petType1");
+						
+		petType1 = this.petTypeService.save(petType1);
+						
+		PetType petType2 = new PetType();
+		petType2.setName("petType2");
+						
+		petType2 = this.petTypeService.save(petType2);
+						
+		System.out.println("PetTypes have been saved !!!");
+		
+		//Save some pets
+		Pet pet1 = new Pet();
+		pet1.setName("pet1");
+		//pet1.setOwner(owner1);
+		pet1.setPetType(petType1);
+		pet1.setBirthDate(LocalDate.now());
+					
+		//pet1 = this.petService.save(pet1);
+							
+		Pet pet2 = new Pet();
+		pet2.setName("pet2");
+		//pet2.setOwner(owner2);
+		pet2.setPetType(petType2);
+		pet2.setBirthDate(LocalDate.now());
+					
+		//pet2 = this.petService.save(pet2);
+					
+				
 		//Save some owners
 		Owner owner1 = new Owner();
 		
@@ -61,6 +93,9 @@ public class LoaderData implements CommandLineRunner{
 		owner1.setAddress("51 avenue raymod aron");
 		owner1.setCity("Paris");
 		owner1.setTel("0760159528");
+		
+		owner1.getPets().add(pet1);
+		pet1.setOwner(owner1);
 		
 		this.ownerService.save(owner1);
 		
@@ -72,46 +107,22 @@ public class LoaderData implements CommandLineRunner{
 		owner2.setCity("Paris");
 		owner2.setTel("0779297825");
 		
+		owner2.getPets().add(pet2);
+		pet2.setOwner(owner2);
+		
 		this.ownerService.save(owner2);
 		
-		//Save some PetTypes
-		PetType petType1 = new PetType();
-		petType1.setName("petType1");
-				
-		this.petTypeService.save(petType1);
-				
-		PetType petType2 = new PetType();
-		petType2.setName("petType2");
-				
-		this.petTypeService.save(petType2);
-				
-		System.out.println("PetTypes have been saved !!!");
-		
-		//Save some pets
-		Pet pet1 = new Pet();
-		pet1.setName("pet1");
-		pet1.setOwner(owner1);
-		pet1.setPetType(petType1);
-		pet1.setBirthDate(LocalDate.now());
-		
-		this.petService.save(pet1);
-				
-		Pet pet2 = new Pet();
-		pet2.setName("pet2");
-		pet2.setOwner(owner2);
-		pet2.setPetType(petType2);
-		pet2.setBirthDate(LocalDate.now());
-		
-		this.petService.save(pet2);
-		
 		System.out.println("Pet and owners have been saved !!!");
+		
 		
 		//Save some Specialities
 		Speciality speciality1 = new Speciality();
 		speciality1.setDescription("this is speciality 1.");
+		speciality1 = this.specialityService.save(speciality1);
 		
 		Speciality speciality2 = new Speciality();
 		speciality2.setDescription("this is speciality 2.");
+		speciality2 = this.specialityService.save(speciality2);
 		
 		//Save some Vets
 		Vet vet1 = new Vet();
