@@ -86,16 +86,20 @@ public class LoaderData implements CommandLineRunner{
 					
 				
 		//Save some owners
-		Owner owner1 = new Owner();
+		Owner owner1 = new Owner(); 
 		
-		owner1.setFirstName("Mehdi");
+		/*owner1.setFirstName("Mehdi");
 		owner1.setLastName("BOUMZZI");
 		owner1.setAddress("51 avenue raymod aron");
 		owner1.setCity("Paris");
-		owner1.setTel("0760159528");
+		owner1.setTel("0760159528");*/
+		
+		//we are using the builder to initialize our object instead of initializing each property by calling her setter
+		owner1=Owner.builder().firstName("Mehdi").lastName("BOUMZZI").address("51 avenue RA.ARON").city("PARIS").tel("0760").build();
 		
 		owner1.getPets().add(pet1);
 		pet1.setOwner(owner1);
+		
 		
 		this.ownerService.save(owner1);
 		
