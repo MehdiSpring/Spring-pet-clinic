@@ -13,7 +13,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+ 
 @Getter
 @Setter
 @NoArgsConstructor
@@ -21,9 +21,9 @@ import lombok.Setter;
 public class Vet extends Person {
 	
 	@Builder
-	public Vet(Long id, String firstName, String lastName)
+	public Vet(String firstName, String lastName)
 	{
-		super(id,firstName,lastName);
+		super(firstName,lastName);
 	}
 	
 	@ManyToMany(fetch = FetchType.EAGER)

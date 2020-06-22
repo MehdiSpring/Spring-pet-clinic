@@ -12,7 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+ 
 /*
  * this annotation tells JPA to not create a table for this class, and all its
  * informations and its mappings will be inherited by the subclasses

@@ -18,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 //@AllArgsConstructor
 //@Builder
-@Entity
+@Entity 
 public class Owner extends Person {
 	
 	/*This annotation allows us to initialize an object without calling a setter in each property
