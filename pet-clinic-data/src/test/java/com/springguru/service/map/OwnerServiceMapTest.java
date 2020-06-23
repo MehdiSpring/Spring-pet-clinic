@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.springguru.model.Owner;
 
-public class OwnerServiceMapTest2 {
+public class OwnerServiceMapTest {
 
 	OwnerServiceMap ownerServiceMap;
 	@Before
