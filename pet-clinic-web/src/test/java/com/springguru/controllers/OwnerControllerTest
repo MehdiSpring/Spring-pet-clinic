@@ -21,7 +21,7 @@ import com.springguru.model.Owner;
 import com.springguru.service.OwnerService;
 
 @ExtendWith(MockitoExtension.class)
-class OwnerControllerTest {
+public class OwnerControllerTest {
 
 	@Mock
 	OwnerService ownerService;
