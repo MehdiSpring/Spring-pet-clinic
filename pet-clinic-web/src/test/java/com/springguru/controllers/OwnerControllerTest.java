@@ -1,5 +1,9 @@
 package com.springguru.controllers;
 
+import static org.mockito.Mockito.verifyNoInteractions;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -42,7 +46,7 @@ public class OwnerControllerTest {
 	}
 
 	@Test
-	void testListAllOwners() throws Exception{
+	void testListAllOwners() throws Exception{ 
 		when(ownerService.findAll()).thenReturn(owners);
 		mockMVC.perform(get("/owners")).andExpect(status().isOk())
 		                               .andExpect(view().name("owners/index"))
