@@ -1,5 +1,6 @@
 package com.springguru.controllers;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -10,10 +11,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashSet;
 import java.util.Set;
 
+import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
+import org.hamcrest.beans.HasProperty;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -59,6 +63,17 @@ public class OwnerControllerTest {
 		                                    .andExpect(view().name("notImplemented"));
 		verifyNoInteractions(ownerService);
 		
+	}
+	
+	@Test
+	void testShowOwner() throws Exception{
+		Owner owner = new Owner();
+		owner.setId(1L);
+		
+		when(ownerService.findById(ArgumentMatchers.anyLong())).thenReturn(owner);
+		
+		mockMVC.perform(get("/owners/1")).andExpect(status().isOk())
+										 .andExpect(model().attribute("owner",Matchers.hasProperty("id", is(1L))));
 	}
 
 }
