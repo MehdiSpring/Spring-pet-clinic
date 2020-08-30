@@ -1,5 +1,6 @@
 package com.springguru.service.map;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -71,6 +72,12 @@ public class OwnerServiceMap extends AbstractMapService<Long, Owner> implements 
 				return mapEntry.getValue();
 		}
 		
+		return null;
+	}
+
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastName) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 

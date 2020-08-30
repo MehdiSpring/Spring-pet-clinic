@@ -3,6 +3,7 @@ package com.springguru.service.jpa;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -84,6 +85,12 @@ public class OwnerServiceJPAImpl implements OwnerService {
 			return owner.get();
 		else
 			return null;
+	}
+
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastName) {
+		// TODO Auto-generated method stub
+		return this.ownerRepository.findAllByLastNameLike("%"+lastName+"%");
 	}
 
 }

@@ -8,7 +8,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.hamcrest.Matcher;
@@ -60,9 +62,47 @@ public class OwnerControllerTest {
 	@Test
 	void testFindOwners() throws Exception{
 		mockMVC.perform(get("/owners/find")).andExpect(status().isOk())
-		                                    .andExpect(view().name("notImplemented"));
+		                                    .andExpect(view().name("owners/findOwners"));
 		verifyNoInteractions(ownerService);
 		
+	}
+	
+	@Test
+	void testFindOwnerByLastNameNoOwner() throws Exception{
+		List<Owner> ownersList = new ArrayList<Owner>();
+		when(ownerService.findAllByLastNameLike(ArgumentMatchers.anyString())).thenReturn(ownersList);
+		
+		mockMVC.perform(get("/owners/lastName")).andExpect(status().isOk())
+												.andExpect(view().name("owners/findOwners"));
+																								
+	}
+	
+	@Test
+	void testFindOwnerByLastNameOneOwner() throws Exception{
+		List<Owner> ownersList = new ArrayList<Owner>();
+		Owner owner= new Owner();
+		owner.setId(1L);
+		ownersList.add(owner);
+		
+		when(ownerService.findAllByLastNameLike(ArgumentMatchers.anyString())).thenReturn(ownersList);
+		
+		mockMVC.perform(get("/owners/lastName")).andExpect(status().is3xxRedirection())
+												.andExpect(view().name("redirect:/owners/"+owner.getId()));
+																								
+	}
+	
+	@Test
+	void testFindOwnerByLastNameManyOwners() throws Exception{
+		List<Owner> ownersList = new ArrayList<Owner>();
+		ownersList.add(new Owner());
+		ownersList.add(new Owner());
+		
+		when(ownerService.findAllByLastNameLike(ArgumentMatchers.anyString())).thenReturn(ownersList);
+		
+		mockMVC.perform(get("/owners/lastName")).andExpect(status().isOk())
+												.andExpect(model().attributeExists("owners"))
+												.andExpect(view().name("owners/ownersList"));
+																								
 	}
 	
 	@Test
