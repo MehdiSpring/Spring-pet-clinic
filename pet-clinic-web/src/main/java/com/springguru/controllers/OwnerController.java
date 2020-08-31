@@ -2,12 +2,17 @@ package com.springguru.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,6 +32,10 @@ public class OwnerController {
 		this.ownerService = ownerService;		
 	}
 
+	@InitBinder
+	public void setAllowedFields(WebDataBinder dataBinder) {
+		dataBinder.setDisallowedFields("id");
+	}
 
 	@RequestMapping({"","/","/index","/index.html"})
 	public String listAllOwners(Model model)
@@ -76,4 +85,48 @@ public class OwnerController {
 		return mav;
 	}
 	
+	@GetMapping("/new")
+	public String goToCreateTemplate(Model model)
+	{
+		model.addAttribute("owner", new Owner());
+		return "owners/createOrUpdateOwnerForm";
+	}
+	
+	@PostMapping("/new")
+	public String createOwner(@Valid Owner owner, BindingResult result)
+	{
+		if (result.hasErrors()) {
+			return "owners/createOrUpdateOwnerForm";
+		}
+		else
+		{
+			Owner savedOwner = this.ownerService.save(owner);
+			return "redirect:/owners/"+savedOwner.getId();
+		}
+		
+	}
+	
+	@GetMapping("/{ownerId}/edit")
+	public String goToUpdateTemplate(@PathVariable Long ownerId, Model model)
+	{
+		model.addAttribute("owner", this.ownerService.findById(ownerId));
+		return "owners/createOrUpdateOwnerForm";
+	}
+	
+	@PostMapping("/{ownerId}/edit")
+	public String updateOwner(@Valid Owner owner, @PathVariable Long ownerId, BindingResult result)
+	{
+		if (result.hasErrors()) {
+			return "owners/createOrUpdateOwnerForm";
+		}
+		else
+		{
+			owner.setId(ownerId);
+			Owner savedowner = this.ownerService.save(owner);
+			
+			return "redirect:/owners/"+savedowner.getId();
+		}
+		
+		
+	}
 }
