@@ -21,15 +21,13 @@ import com.springguru.service.VisitService;
 @RequestMapping("/owners/{ownerId}/pets/{petId}")
 public class VisitController {
 
-	private final OwnerService ownerService;
+	
 	private final PetService petService;
-	private final VisitService visitService;
 	
 	
-	public VisitController(OwnerService ownerService, PetService petService, VisitService visitService) {
-		this.ownerService = ownerService;
-		this.petService = petService;
-		this.visitService = visitService;
+	
+	public VisitController(PetService petService) {		
+		this.petService = petService;		
 	}
 
 

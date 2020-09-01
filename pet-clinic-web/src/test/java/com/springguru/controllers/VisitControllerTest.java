@@ -24,15 +24,9 @@ import com.springguru.service.VisitService;
 
 @ExtendWith(MockitoExtension.class)
 class VisitControllerTest {
-
-	@Mock
-	OwnerService ownerService;
 	
 	@Mock
 	PetService petService;
-	
-	@Mock
-	VisitService visitService;
 	
 	@InjectMocks
 	VisitController visitController;
