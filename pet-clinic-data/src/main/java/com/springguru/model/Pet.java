@@ -1,6 +1,7 @@
 package com.springguru.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +34,8 @@ public class Pet extends BaseEntity {
 	
 	private LocalDate birthDate;
 	
+	private String stringDate;
+	
 	@ManyToOne
 	private PetType petType;
 	
@@ -41,6 +44,7 @@ public class Pet extends BaseEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
 	private Set<Visit> visits = new HashSet<Visit>();
+	
 	
 	/*
 	 * public PetType getPetType() { return petType; } public void
