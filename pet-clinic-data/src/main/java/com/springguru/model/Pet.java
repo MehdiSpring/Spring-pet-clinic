@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +35,7 @@ public class Pet extends BaseEntity {
 	
 	private LocalDate birthDate;
 	
+	@Transient
 	private String stringDate;
 	
 	@ManyToOne

@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -64,6 +66,11 @@ class PetControllerTest {
 	
 	@Test
 	void testGoToUpdateTemplate() throws Exception{
+		Pet pet = new Pet();
+		pet.setBirthDate(LocalDate.now());
+		
+		when(petService.findById(ArgumentMatchers.anyLong())).thenReturn(pet );
+		
 		mockMVC.perform(get("/owners/1/pets/1/edit")).andExpect(status().isOk())
 													 .andExpect(view().name("pets/createOrUpdatePetForm"));
 	}

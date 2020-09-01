@@ -92,6 +92,9 @@ public class PetController {
 		
 		Pet pet = this.petService.findById(petId);
 		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		pet.setStringDate(pet.getBirthDate().format(formatter));
+		
 		model.addAttribute("pet", pet);
 		return "pets/createOrUpdatePetForm";
 		
